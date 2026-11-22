@@ -1,0 +1,576 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Novax Global Academy</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;700;800&display=swap">
+<style>
+/* Layout: dark-ink hero with a rotating globe, then light sections; one saffron accent, teal only for success/tags. */
+:root{
+  --bg:#F5F7FA; --surface:#FFFFFF; --fg:#0F1D33; --muted:#52607A; --line:#DDE3EC;
+  --ink:#0F1D33; --ink-fg:#EAF0FA; --ink-muted:#9FB0CC;
+  --accent:#E8951C; --accent-fg:#1A1203; --teal:#128C7E;
+  --display:'Sora','Inter',system-ui,sans-serif; --body:'Inter',system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0A1423; --surface:#111F36; --fg:#EAF0FA; --muted:#9FB0CC; --line:#223350;
+  --ink:#070E1A; --accent:#F2A93B; --teal:#3CC4B3; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A1423; --surface:#111F36; --fg:#EAF0FA; --muted:#9FB0CC; --line:#223350;
+  --ink:#070E1A; --accent:#F2A93B; --teal:#3CC4B3; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1100px;margin:0 auto}
+.band{margin-left:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+/* hero */
+.hero{background:var(--ink);color:var(--ink-fg);margin-top:calc(-1 * env(safe-area-inset-top,0px));padding-top:calc(env(safe-area-inset-top,0px) + 1rem);padding-bottom:3rem;overflow:hidden}
+nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding-bottom:2.5rem}
+.logo{font:800 1.05rem var(--display);letter-spacing:.04em;text-decoration:none;display:flex;gap:.6rem;align-items:center}
+.logo i{width:26px;height:26px;border-radius:50%;border:2px solid var(--accent);position:relative;display:inline-block}
+.logo i::after{content:"";position:absolute;inset:5px 9px;background:var(--accent);border-radius:50%}
+nav ul{display:flex;gap:1.4rem;list-style:none;margin:0;padding:0;flex-wrap:wrap;font-size:.92rem;color:var(--ink-muted)}
+nav a{text-decoration:none}nav a:hover{color:var(--ink-fg)}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center}
+.hero-grid>*{min-width:0}
+.eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.hero h1{font-size:clamp(2.1rem,5.2vw,3.7rem);font-weight:800;margin:.8rem 0 1rem}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{color:var(--ink-muted);font-size:1.1rem;max-width:34rem;margin:0 0 1.6rem}
+.btns{display:flex;gap:.8rem;flex-wrap:wrap}
+.btn{display:inline-block;border:0;cursor:pointer;font:600 1rem var(--body);padding:.85rem 1.4rem;border-radius:10px;text-decoration:none;background:var(--accent);color:var(--accent-fg);transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--ink-fg);border:1.5px solid #3B4D6B}
+.globe{width:100%;max-width:420px;aspect-ratio:1;margin:0 auto}
+.globe canvas{width:100%;height:100%;display:block}
+.stats{display:flex;gap:2rem;flex-wrap:wrap;margin-top:2.2rem;color:var(--ink-muted);font-size:.9rem}
+.stats b{display:block;font:700 1.5rem var(--display);color:var(--ink-fg)}
+/* sections */
+section{padding-block:4rem}
+.sec-head{max-width:40rem;margin-bottom:2rem}
+.sec-head h2{font-size:clamp(1.6rem,3.5vw,2.3rem);margin-bottom:.6rem}
+.sec-head p{color:var(--muted);margin:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:1.2rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.4rem;display:flex;flex-direction:column;gap:.8rem;min-width:0;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(15,29,51,.12)}
+.tag{align-self:flex-start;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--teal);border:1px solid var(--teal);border-radius:99px;padding:.15rem .6rem}
+.card h3{font-size:1.2rem}
+.meta{color:var(--muted);font-size:.85rem}
+.card ul{margin:0;padding-left:1.1rem;color:var(--muted);font-size:.92rem}
+.buy{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-top:auto;flex-wrap:wrap}
+.price{font:800 1.8rem var(--display)}.price small{font:500 .8rem var(--body);color:var(--muted)}
+.link{background:none;border:0;color:var(--fg);font:600 .92rem var(--body);cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:.4rem 0}
+.btn.sm{padding:.6rem 1.1rem;font-size:.92rem}
+/* reader */
+.reader{position:fixed;inset:0;z-index:30;background:var(--bg);overflow-y:auto;overscroll-behavior:contain;padding-top:calc(env(safe-area-inset-top,0px) + .5rem);padding-bottom:calc(3rem + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.reader .sheet{max-width:780px;margin:0 auto}
+.reader .rd-top{position:sticky;top:0;background:var(--bg);padding:.7rem 0;border-bottom:1px solid var(--line);z-index:1}
+.reader[hidden]{display:none!important}
+.reader h3{font-size:1.6rem;margin:.4rem 0 .6rem}
+.reader .intro{color:var(--muted);max-width:42rem}
+.block{border-top:1px solid var(--line);padding-top:1rem;margin-top:1.2rem;max-width:44rem}
+.block h4{font:700 1.05rem var(--display);margin:0 0 .4rem}
+.block p{margin:.3rem 0}
+.block ul{margin:.4rem 0 0;padding-left:1.2rem}
+.block li{margin:.25rem 0}
+.rd-top{display:flex;justify-content:space-between;gap:1rem;align-items:center;flex-wrap:wrap}
+/* features */
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1.2rem}
+.feat div{border-left:3px solid var(--accent);padding:.2rem 0 .2rem 1rem}
+.feat h3{font-size:1.05rem;margin-bottom:.3rem}.feat p{margin:0;color:var(--muted);font-size:.95rem}
+/* faq */
+details{border-bottom:1px solid var(--line);padding:1rem 0;max-width:46rem}
+summary{cursor:pointer;font:600 1.05rem var(--display)}
+details p{color:var(--muted);margin:.6rem 0 0}
+footer{background:var(--ink);color:var(--ink-muted);padding-block:2.5rem calc(2.5rem);font-size:.92rem}
+footer .row{display:flex;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+footer b{color:var(--ink-fg);font-family:var(--display)}
+.toast{position:fixed;left:50%;bottom:calc(1.2rem + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--ink-fg);padding:.8rem 1.2rem;border-radius:10px;opacity:0;pointer-events:none;transition:.3s;max-width:90vw;font-size:.92rem;border:1px solid #3B4D6B;z-index:20}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.reveal{animation:rise .7s both}
+@keyframes rise{from{opacity:.001;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hero{background:radial-gradient(900px 500px at 85% 20%,rgba(232,149,28,.18),transparent 60%),radial-gradient(700px 400px at 0% 100%,rgba(18,153,127,.16),transparent 60%),var(--ink)}
+.globe-wrap{position:relative;max-width:440px;margin:0 auto;width:100%}
+.chip{position:absolute;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(6px);color:#EAF0FA;font:600 .8rem var(--display);padding:.4rem .8rem;border-radius:99px;animation:float 5s ease-in-out infinite}
+.chip.a{top:8%;left:0}.chip.b{top:22%;right:-2%;animation-delay:-1.5s}.chip.c{bottom:20%;left:-2%;animation-delay:-3s}.chip.d{bottom:6%;right:6%;animation-delay:-4s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.vis{height:120px;border-radius:10px;background:linear-gradient(135deg,var(--c),color-mix(in srgb,var(--c) 45%,#0F1D33));display:grid;place-items:center;position:relative;overflow:hidden}
+.vis::before,.vis::after{content:"";position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.28)}
+.vis::before{width:150px;height:150px;right:-40px;top:-60px}.vis::after{width:100px;height:100px;left:-30px;bottom:-50px}
+.vis svg{width:58px;height:58px;stroke:#fff;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;position:relative;animation:float 4.5s ease-in-out infinite}
+.card .tag{color:var(--c);border-color:var(--c)}
+details.lessons{border:0;padding:0;max-width:none}
+details.lessons summary{font:600 .92rem var(--body);color:var(--fg)}
+details.lessons ol{margin:.5rem 0 0;padding-left:1.2rem;color:var(--muted);font-size:.92rem}
+.goal{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:clamp(1.2rem,4vw,2rem)}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem;margin:1rem 0}
+.goal button.opt{font:500 .95rem var(--body);color:var(--fg);background:var(--bg);border:1.5px solid var(--line);border-radius:99px;padding:.6rem 1.1rem;cursor:pointer;transition:.15s}
+.goal button.opt:hover,.goal button.opt[aria-pressed="true"]{border-color:var(--accent);background:var(--accent);color:var(--accent-fg)}
+.rec{min-height:3rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.rec b{font-family:var(--display)}
+.contact{background:var(--ink);color:var(--ink-fg);border-radius:20px;padding:clamp(1.5rem,5vw,3rem);display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;align-items:center}
+.contact>*{min-width:0}
+.contact h2{font-size:clamp(1.6rem,3.5vw,2.3rem);margin-bottom:.6rem}
+.contact p{color:var(--ink-muted);margin:0}
+.mail{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:1rem;display:flex;flex-direction:column;gap:.7rem}
+.mail code{font:600 1.02rem var(--body);overflow-wrap:anywhere;color:var(--accent);user-select:all}
+.mail small{color:var(--ink-muted)}
+details.lessons h5{font:700 .8rem var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--c);margin:.9rem 0 .2rem}
+.tabs{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1rem}
+button.opt{font:500 .95rem var(--body);color:var(--fg);background:var(--surface);border:1.5px solid var(--line);border-radius:99px;padding:.6rem 1.1rem;cursor:pointer}
+button.opt[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:clamp(1.1rem,4vw,2rem)}
+.panel[hidden]{display:none!important}
+.wod{border-left:3px solid var(--accent);padding-left:1rem;margin-bottom:1.2rem}
+.wod b{font:700 1.2rem var(--display)}
+.fcard{min-height:170px;border-radius:14px;background:linear-gradient(135deg,var(--ink),#1B3157);color:var(--ink-fg);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:.6rem;padding:1.5rem}
+.fcard .w{font:800 clamp(1.6rem,6vw,2.4rem) var(--display)}
+.fcard .t{color:var(--accent);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase}
+.fcard .d{max-width:30rem}.fcard .e{color:var(--ink-muted);font-style:italic;max-width:30rem}
+.btn.ghost2{background:transparent;color:var(--fg);border:1.5px solid var(--line)}
+textarea,select{width:100%;font:1rem var(--body);color:var(--fg);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:.7rem}
+textarea{resize:vertical;min-height:180px}
+.checks,.plan{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.6rem}
+.checks li{display:flex;gap:.7rem;align-items:flex-start;padding:.7rem .9rem;border-radius:10px;background:var(--bg);border:1px solid var(--line)}
+.checks li b{flex:none;width:1.4rem;height:1.4rem;border-radius:50%;display:grid;place-items:center;font-size:.8rem;color:#fff}
+.checks li.ok b{background:var(--teal)}.checks li.no b{background:#C23A52}
+.checks small{display:block;color:var(--muted)}
+.form{display:grid;grid-template-columns:1.5fr 1fr auto;gap:1rem;align-items:end}.form>*{min-width:0}
+.plan li{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem}
+.plan b{font-family:var(--display)}
+.quiz{border-top:1px solid var(--line);margin-top:1.6rem;padding-top:1rem}
+.quiz h4{font:700 1.15rem var(--display);margin:0 0 .8rem}
+.q{margin-bottom:1.2rem}
+.q p{font-weight:600;margin:.2rem 0 .5rem}
+.q button{display:block;width:100%;text-align:left;font:500 .98rem var(--body);color:var(--fg);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:.65rem .9rem;margin:.35rem 0;cursor:pointer}
+.q button:disabled{cursor:default;color:var(--fg);opacity:1}
+.q button.right{border-color:var(--teal);background:color-mix(in srgb,var(--teal) 18%,var(--bg))}
+.q button.wrong{border-color:#C23A52;background:color-mix(in srgb,#C23A52 14%,var(--bg))}
+.why{color:var(--muted);font-size:.9rem;margin:.2rem 0 0}
+.score{font:700 1.1rem var(--display);color:var(--teal)}
+@media (max-width:760px){.form{grid-template-columns:1fr}}
+.block.mistake{border-left:4px solid #C23A52;padding-left:1rem;background:color-mix(in srgb,#C23A52 8%,var(--bg))}
+.block.practice{border-left:4px solid var(--teal);padding-left:1rem;background:color-mix(in srgb,var(--teal) 10%,var(--bg))}
+.block.rule{border-left:4px solid var(--accent);padding-left:1rem}
+.step .block{border-top:0;margin-top:1rem;border-radius:0 10px 10px 0;padding-top:.8rem;padding-bottom:.8rem}
+.step h3{margin-top:1rem}
+.stepnav{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:1.4rem;position:sticky;bottom:0;background:var(--bg);padding:.8rem 0}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--teal);transition:width .3s}
+.overall{display:grid;gap:.4rem;margin-bottom:1.2rem;max-width:34rem}
+.tl{list-style:none;padding:0!important}
+.tl label{display:flex;gap:.6rem;align-items:flex-start;cursor:pointer;padding:.2rem 0}
+.tl input{margin-top:.3rem;width:1.1rem;height:1.1rem;accent-color:var(--teal)}
+.about{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:start}
+.about>*{min-width:0}
+.about p{color:var(--muted);margin:.6rem 0}
+.who{display:grid;gap:.8rem}
+.who div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1rem 1.2rem}
+.who h3{font-size:1rem;margin-bottom:.2rem}.who p{margin:0;font-size:.93rem}
+.paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:1.2rem}
+.path{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.3rem}
+.path h3{font-size:1.1rem;margin-bottom:.3rem}.path>p{color:var(--muted);margin:0 0 .8rem;font-size:.93rem}
+.path ol{margin:0;padding:0;list-style:none;display:grid;gap:.5rem;counter-reset:s}
+.path li{counter-increment:s;display:flex;gap:.7rem;align-items:center;font-weight:500}
+.path li::before{content:counter(s);flex:none;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--accent);color:var(--accent-fg);display:grid;place-items:center;font:700 .85rem var(--display)}
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:1.2rem}
+.quotes figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.4rem;display:flex;flex-direction:column;gap:1rem;justify-content:space-between;min-width:0}
+.quotes blockquote{margin:0;font:600 1.1rem/1.45 var(--display)}
+.quotes blockquote::before{content:"\201C";display:block;font:800 3rem/1 var(--display);color:var(--accent);height:1.5rem}
+.quotes figcaption{color:var(--muted);font-size:.88rem}
+.quotes figure:first-child{background:var(--ink);color:var(--ink-fg);border-color:var(--ink)}
+.quotes figure:first-child figcaption{color:var(--ink-muted)}
+.note{color:var(--muted);font-size:.82rem;margin-top:1rem}
+@media (max-width:760px){.about{grid-template-columns:1fr}}
+@media (max-width:760px){.contact{grid-template-columns:1fr}.chip.b,.chip.c{right:0;left:0}.chip.b{left:auto}.chip.c{right:auto}}
+@media (max-width:760px){.hero-grid{grid-template-columns:1fr}.globe{max-width:300px}nav ul{gap:1rem}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="hero band">
+ <div class="wrap">
+  <nav>
+   <a class="logo" href="#top"><i></i>NOVAX GLOBAL ACADEMY</a>
+   <ul><li><a href="#about">About</a></li><li><a href="#courses">Courses</a></li><li><a href="#practice">Practice</a></li><li><a href="#how">What you get</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contact-us">Contact</a></li></ul>
+  </nav>
+  <div class="hero-grid" id="top">
+   <div class="reveal">
+    <div class="eyebrow">English · IELTS · Economics · Global affairs</div>
+    <h1>Learn English. <em>Understand the world.</em></h1>
+    <p class="lead">Short, clear courses in English, communication, economics and international relations. Every lesson comes with a PDF you keep. Each course costs $3.</p>
+    <div class="btns"><a class="btn" href="#courses">See the 7 courses</a><a class="btn ghost" href="#courses" data-sample="ielts">Read a free IELTS lesson</a><a class="btn ghost" href="#level">Find your level</a></div>
+    <div class="stats"><div><b>$3</b>per course</div><div><b>7</b>courses</div><div><b>PDF</b>with every lesson</div></div>
+   </div>
+   <div class="globe-wrap"><div class="globe" aria-hidden="true"><canvas id="globe"></canvas></div><span class="chip a">IELTS</span><span class="chip b">Economics</span><span class="chip c">English</span><span class="chip d">Diplomacy</span></div>
+  </div>
+ </div>
+</header>
+
+<main class="wrap">
+ <section id="about">
+  <div class="about">
+   <div><div class="eyebrow" style="color:var(--teal)">About the academy</div><h2 style="font-size:clamp(1.6rem,3.5vw,2.3rem);margin:.5rem 0">Language and the world, explained simply</h2>
+    <p>Novax Global Academy is an independent online academy. We teach English together with the subjects behind global news: communication, economics, international relations and international affairs.</p>
+    <p>Every lesson is short and built around one idea. You get a plain explanation, real examples, useful vocabulary and a practice task. Each lesson also comes as a PDF, so you can study on a phone, print it, or keep it for later.</p>
+    <p>Lessons are written in clear English, so you learn the subject and practise the language at the same time.</p></div>
+   <div class="who">
+    <div><h3>IELTS candidates</h3><p>Learn the test format, essay structure and speaking strategies for a higher band.</p></div>
+    <div><h3>Students abroad or planning to study abroad</h3><p>Build the English and the academic vocabulary used in universities.</p></div>
+    <div><h3>Professionals</h3><p>Write clear emails, present ideas and join international meetings with confidence.</p></div>
+    <div><h3>Curious readers</h3><p>Understand how markets, diplomacy and global institutions work.</p></div>
+   </div>
+  </div>
+ </section>
+
+ <section id="level">
+  <div class="sec-head"><h2>Find your level</h2><p>Ten quick questions. You get an approximate level and a course to start with.</p></div>
+  <div class="panel"><div id="lvq"></div><div id="lvres" class="rec" aria-live="polite"></div></div>
+ </section>
+
+ <section id="goal">
+  <div class="goal">
+   <div class="sec-head" style="margin:0"><h2>What do you want to achieve?</h2><p>Pick a goal and we will point you to the right course.</p></div>
+   <div class="chips" id="chips"></div>
+   <div class="rec" id="rec" aria-live="polite"><span style="color:var(--muted)">Choose a goal above.</span></div>
+  </div>
+ </section>
+
+ <section id="courses">
+  <div class="sec-head"><h2>Choose a course</h2><p>Each one is built from short lessons with simple explanations, examples and practice. Open the free sample lesson to try it before you pay.</p></div>
+  <div class="overall"><div class="bar"><i id="allbar"></i></div><span class="meta" id="alltxt"></span></div>
+  <div class="grid" id="grid"></div>
+  <article class="reader" id="reader" hidden aria-live="polite"></article>
+ </section>
+
+ <section id="practice">
+  <div class="sec-head"><h2>Practice zone</h2><p>Free tools to practise every day. Your progress stays on this device.</p></div>
+  <div class="tabs" role="tablist">
+   <button class="opt" role="tab" aria-selected="true" data-tab="fc">Flashcards</button>
+   <button class="opt" role="tab" aria-selected="false" data-tab="es">Essay checker</button>
+   <button class="opt" role="tab" aria-selected="false" data-tab="pl">Study plan</button>
+  </div>
+  <div class="panel" id="p-fc">
+   <div class="wod"><span class="eyebrow">Word of the day</span><div id="wod"></div></div>
+   <div class="fcard" id="fcard"></div>
+   <div class="btns" style="margin-top:1rem"><button class="btn sm" id="fcFlip">Show meaning</button><button class="btn sm ghost2" id="fcAgain">Practise again</button><button class="btn sm ghost2" id="fcSay" data-hide-nospeech>Listen</button><button class="btn sm" id="fcKnow" style="background:var(--teal);color:#fff">I know it</button></div>
+   <p class="note" id="fcStat"></p>
+   <div style="max-width:260px"><label for="fcLang" class="meta">Translate into</label><select id="fcLang"><option value="">No translation</option><option value="ru">Russian</option><option value="es">Spanish</option><option value="uz">Uzbek</option></select></div>
+  </div>
+  <div class="panel" id="p-es" hidden>
+   <p style="margin-top:0;color:var(--muted)">Paste your IELTS Task 2 essay. This checks length and structure. It is not a band score.</p>
+   <label for="essay" class="meta">Your essay</label>
+   <textarea id="essay" rows="9" placeholder="Write or paste your essay here. Leave a blank line between paragraphs."></textarea>
+   <div class="btns" style="margin-top:.8rem"><button class="btn sm" id="essayGo">Check my essay</button></div>
+   <ul class="checks" id="essayOut"></ul>
+  </div>
+  <div class="panel" id="p-pl" hidden>
+   <div class="form">
+    <div><label for="plGoal" class="meta">My goal</label><select id="plGoal"></select></div>
+    <div><label for="plMin" class="meta">Minutes per day</label><select id="plMin"><option value="10">10</option><option value="20" selected>20</option><option value="30">30</option><option value="45">45</option><option value="60">60</option></select></div>
+    <button class="btn sm" id="plGo">Build my plan</button>
+   </div>
+   <ol class="plan" id="plOut"></ol>
+  </div>
+ </section>
+
+ <section id="paths">
+  <div class="sec-head"><h2>Where to start</h2><p>Two suggested orders. Each course also works on its own.</p></div>
+  <div class="paths">
+   <div class="path"><h3>Language and test path</h3><p>For learners who want better English and a stronger IELTS result.</p><ol><li>English Foundations to Fluency</li><li>Confident English Speaking</li><li>Clear Communication at Work and Study</li><li>IELTS Band 7 Roadmap</li></ol></div>
+   <div class="path"><h3>Global knowledge path</h3><p>For learners who want to understand the world and discuss it in English.</p><ol><li>Economics Essentials</li><li>International Relations: Big Ideas</li><li>Global Affairs Explained</li></ol></div>
+  </div>
+ </section>
+
+ <section id="how">
+  <div class="sec-head"><h2>What every course includes</h2></div>
+  <div class="feat">
+   <div><h3>Easy to understand</h3><p>One idea per lesson, plain English, and an example for every rule.</p></div>
+   <div><h3>PDF for every lesson</h3><p>Download it, print it, study offline on a phone or laptop.</p></div>
+   <div><h3>Practice tasks</h3><p>Each lesson ends with a short task so you use what you learned.</p></div>
+   <div><h3>International focus</h3><p>Topics and vocabulary used in study, work and global news.</p></div>
+  </div>
+ </section>
+
+ <section id="faq">
+  <div class="sec-head"><h2>Questions</h2></div>
+  <details><summary>How do I pay?</summary><p>Choose a course and press Buy. Payment is handled by a secure checkout provider, so card details never touch this site.</p></details>
+  <details><summary>How do I get the PDFs?</summary><p>After payment you receive a download link for the course PDFs by email.</p></details>
+  <details><summary>Is the IELTS course official?</summary><p>No. Novax Global Academy is independent and is not affiliated with IELTS, the British Council, IDP or Cambridge. The course teaches skills for the test.</p></details>
+  <details><summary>Do I get a certificate?</summary><p>No. The courses are for learning and practice. They do not include an official certificate or test result.</p></details>
+  <details><summary>Can I study on my phone?</summary><p>Yes. This website works on phones, tablets and computers, and the PDFs open on any device.</p></details>
+  <details><summary>How long does a lesson take?</summary><p>Most lessons take about 10 to 20 minutes, plus time for the practice task.</p></details>
+  <details><summary>What level do I need?</summary><p>Each course card shows its level. English Foundations starts from A2. The communication, economics and international relations courses suit beginners.</p></details>
+ </section>
+<section id="inspire">
+  <div class="sec-head"><h2>Words to learn by</h2><p>A little inspiration for the days when studying feels slow.</p></div>
+  <div class="quotes">
+   <figure><blockquote>The limits of my language mean the limits of my world.</blockquote><figcaption>Ludwig Wittgenstein, philosopher</figcaption></figure>
+   <figure><blockquote>Education is the most powerful weapon which you can use to change the world.</blockquote><figcaption>Nelson Mandela</figcaption></figure>
+   <figure><blockquote>The beautiful thing about learning is that no one can take it away from you.</blockquote><figcaption>B.B. King, musician</figcaption></figure>
+   <figure><blockquote>You can have brilliant ideas, but if you cannot get them across, your ideas will not get you anywhere.</blockquote><figcaption>Lee Iacocca, business leader</figcaption></figure>
+  </div>
+  <p class="note">Quotes are widely attributed to these speakers and are shown in short form.</p>
+ </section>
+
+ <section id="contact-us">
+  <div class="contact">
+   <div><h2>Questions, or a course you want us to add?</h2><p>Write to us. We read every message and reply as soon as we can. Finished a course? Tell us what helped you most.</p></div>
+   <div class="mail"><small>Email</small><code id="mailtxt">toychiyevjavohir2007@gmail.com</code>
+    <div class="btns"><button class="btn sm" id="copymail">Copy email</button><a class="btn sm ghost" href="mailto:toychiyevjavohir2007@gmail.com">Open mail app</a></div></div>
+  </div>
+ </section>
+</main>
+
+<footer class="band" id="contact">
+ <div class="wrap row">
+  <div><b>Novax Global Academy</b><br>Clear lessons for learners everywhere.</div>
+  <div><b>Contact</b><br>toychiyevjavohir2007@gmail.com</div>
+ </div>
+</footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* OWNER SETTINGS: paste each course's payment link here (Payhip, Gumroad, Lemon Squeezy, Ko-fi, PayPal.me). Empty = shows a notice. */
+const BUY_LINKS={english:"",speaking:"",ielts:"",communication:"",economics:"",ir:"",affairs:""};
+const COURSES=[{"id": "english", "tag": "English", "title": "English Foundations to Fluency", "level": "A2 to B2", "lessons": ["Present simple vs present continuous", "Past tenses made simple", "Talking about the future", "Phrasal verbs you actually use", "Everyday conversations and small talk", "Pronunciation and word stress"], "sample": {"title": "Present simple vs present continuous", "intro": "Learn when to use each tense in under ten minutes. One tense describes habits and facts. The other describes things happening around now.", "blocks": [{"h": "1. Present simple: habits and facts", "text": "Use the present simple for things that are always true or that happen regularly.", "bullets": ["She works in a bank. (fact)", "I drink tea every morning. (habit)", "The train leaves at 8:15. (timetable)"]}, {"h": "2. Present continuous: happening now", "text": "Use am/is/are + verb-ing for actions in progress at this moment, or temporary situations.", "bullets": ["I am studying English right now.", "They are staying in a hotel this week.", "Prices are rising quickly."]}, {"h": "3. Quick test", "text": "Ask yourself: is it a routine or fact, or is it happening now? Routine or fact: present simple. Happening now or temporary: present continuous.", "bullets": ["Water (boil) at 100 degrees. Answer: boils", "Be quiet! The baby (sleep). Answer: is sleeping"]}, {"h": "4. Common mistake", "text": "Some verbs describe states, not actions, so we do not use them in the continuous form: know, like, want, need, believe.", "bullets": ["Wrong: I am knowing the answer.", "Right: I know the answer."]}, {"h": "Practice", "text": "Write five sentences about your day: three habits and two things happening now. Check each one against the quick test above."}]}, "quiz": [{"q": "Water ___ at 100 degrees.", "o": ["boils", "is boiling", "boil"], "a": 0, "why": "A scientific fact uses the present simple."}, {"q": "Be quiet! The baby ___.", "o": ["sleeps", "is sleeping", "sleep"], "a": 1, "why": "It is happening now, so use the present continuous."}, {"q": "Which sentence is correct?", "o": ["I am knowing the answer.", "I know the answer.", "I knowing the answer."], "a": 1, "why": "State verbs like know are not used in the continuous form."}, {"q": "She ___ to work by bus every day.", "o": ["goes", "is going", "go"], "a": 0, "why": "A daily habit uses the present simple. With she, add -s."}, {"q": "Look! It ___ outside.", "o": ["rains", "is raining", "rain"], "a": 1, "why": "You can see it now, so use the present continuous."}], "cheat": ["Present simple: habits, facts, timetables (She works)", "Present continuous: now or temporary (She is working)", "State verbs (know, like, want) are not used in the continuous", "Past simple: finished actions (I went)", "Present perfect: past with a link to now (I have lived here since 2015)", "Use for with a period of time, since with a starting point", "Use will for decisions and predictions, going to for plans", "Learn phrasal verbs inside sentences, not in long lists"]}, {"id": "speaking", "tag": "Speaking", "title": "Confident English Speaking", "level": "A2 to C1", "lessons": ["Sounds that confuse learners", "Sentence stress: sound natural", "Connected speech and linking", "Fluency: stop translating in your head", "Describing experiences and telling stories", "Fillers and useful discourse markers"], "sample": {"title": "Sentence stress: sound natural", "intro": "English speakers do not give every word the same strength. Learning which words to stress makes you easier to understand, even with an accent.", "blocks": [{"h": "1. Content words are stressed", "text": "Stress the words that carry the meaning: nouns, main verbs, adjectives and adverbs. Say them longer, louder and clearer.", "bullets": ["I WANT to BUY a NEW PHONE.", "She LIVES in a SMALL TOWN."]}, {"h": "2. Function words are weak", "text": "Small grammar words (to, a, the, of, and, can) are usually quick and quiet. For example, 'to' often sounds like 'tuh' and 'a' like a short 'uh'.", "bullets": ["a cup OF TEA (of sounds like 'uh')", "I'm GOING to the MARKET."]}, {"h": "3. Rhythm", "text": "English rhythm follows the stressed words. The time between stressed words is similar, so extra weak words are squeezed together.", "bullets": ["DOGS eat BONES.", "The DOGS have EATEN the BONES."]}, {"h": "4. Stress changes the meaning", "text": "You can stress a word to show what is important.", "bullets": ["I didn't take YOUR book. (I took someone else's book)", "I didn't TAKE your book. (I borrowed it, or I did not steal it)"]}, {"h": "Practice", "text": "Choose three sentences from today. Underline the content words. Say each sentence aloud, stressing only those words. Record yourself and listen once."}]}, "quiz": [{"q": "Which words are normally stressed in 'I want to buy a new phone'?", "o": ["want, buy, new, phone", "I, to, a", "Every word equally"], "a": 0, "why": "Content words carry the meaning, so they get the stress."}, {"q": "Small words like 'to' and 'of' are usually...", "o": ["weak and quick", "loud and long", "always stressed"], "a": 0, "why": "Function words are usually weak, for example 'to' sounds like 'tuh'."}, {"q": "English rhythm follows...", "o": ["the stressed words", "every syllable equally", "the number of letters"], "a": 0, "why": "Extra weak words are squeezed between the stressed ones."}, {"q": "'I didn't take YOUR book' suggests...", "o": ["I took someone else's book", "I took no books at all", "I never saw your book"], "a": 0, "why": "Stressing YOUR shows that the owner is the important detail."}, {"q": "What helps people understand you even with an accent?", "o": ["Good sentence stress", "Speaking very fast", "Using long words"], "a": 0, "why": "Stress shows which words matter most."}], "cheat": ["Stress content words: nouns, main verbs, adjectives, adverbs", "Function words (to, of, a, the) are weak and quick", "Rhythm follows the stressed words", "Link words: 'turn it off' sounds like 'tur-ni-toff'", "Think in simple English instead of translating", "Use fillers: Well, Actually, Let me think", "Tell stories in order: first, then, after that, finally", "Record yourself and listen once a day"]}, {"id": "ielts", "tag": "IELTS", "title": "IELTS Band 7 Roadmap", "level": "B1 to C1", "lessons": ["Understanding the four IELTS tests and scoring", "Writing Task 1: describing graphs", "Writing Task 2: essay structure", "Speaking Parts 1, 2 and 3", "Reading: skimming and True/False/Not Given", "Listening: spelling, maps and traps"], "sample": {"title": "Writing Task 2: a four-paragraph essay", "intro": "Task 2 is worth twice as much as Task 1 in the Writing score. A clear structure is the fastest way to raise your band.", "blocks": [{"h": "1. The structure (about 250 to 280 words)", "text": "Use four paragraphs. Spend 40 minutes in total.", "bullets": ["Introduction: paraphrase the question, then state your position.", "Body paragraph 1: one main idea, an explanation, an example.", "Body paragraph 2: a second idea, an explanation, an example.", "Conclusion: restate your position in different words."]}, {"h": "2. The four things examiners score", "text": "Task Response, Coherence and Cohesion, Lexical Resource (vocabulary), and Grammatical Range and Accuracy. Each is worth 25 percent."}, {"h": "3. A body paragraph formula", "text": "Point, Explain, Example.", "bullets": ["Point: Public transport reduces traffic congestion.", "Explain: When more people use buses, fewer cars are on the road.", "Example: In cities such as Singapore, charges on cars have pushed more people to trains."]}, {"h": "4. Mistakes that lower your band", "bullets": ["Writing fewer than 250 words.", "Not answering every part of the question.", "Memorized, off-topic paragraphs.", "Repeating the same linking word, such as 'Firstly' in every paragraph."]}, {"h": "Practice", "text": "Choose any past Task 2 question. Plan for five minutes: write your position and two main ideas before you write the essay."}]}, "quiz": [{"q": "What is the minimum word count for Writing Task 2?", "o": ["150", "250", "350"], "a": 1, "why": "Task 2 needs at least 250 words."}, {"q": "Which is one of the four Writing scoring criteria?", "o": ["Lexical Resource", "Handwriting style", "Typing speed"], "a": 0, "why": "The four are Task Response, Coherence and Cohesion, Lexical Resource, and Grammatical Range and Accuracy."}, {"q": "What is a good formula for a body paragraph?", "o": ["Point, Explain, Example", "Question, Answer, Question", "Story, Joke, Summary"], "a": 0, "why": "Make a point, explain it, then support it with an example."}, {"q": "How many paragraphs does the sample structure recommend?", "o": ["Two", "Four", "Seven"], "a": 1, "why": "Introduction, two body paragraphs and a conclusion."}, {"q": "Which habit can lower your band?", "o": ["Memorized, off-topic paragraphs", "Answering every part of the question", "Planning for five minutes"], "a": 0, "why": "Off-topic writing weakens Task Response."}], "cheat": ["Listening about 30 min, Reading 60 min, Writing 60 min, Speaking 11 to 14 min", "Overall band = average of the four sections, rounded to the nearest half band", "Task 1: 150+ words in 20 min. Introduction, overview, two detail paragraphs", "Task 2: 250+ words in 40 min. Four paragraphs", "Point, Explain, Example in every body paragraph", "True = agrees. False = contradicts. Not Given = no information", "Listening: read the questions first. Spelling counts", "Speaking: extend your answers and never memorize"]}, {"id": "communication", "tag": "Communication", "title": "Clear Communication at Work and Study", "level": "All levels", "lessons": ["The PREP method for clear answers", "Active listening", "Writing short, polite emails", "Presenting your ideas", "Handling disagreement politely", "Cross-cultural communication basics"], "sample": {"title": "The PREP method for clear answers", "intro": "PREP gives your answer a shape, so people understand you faster. It works in meetings, interviews and the IELTS Speaking test.", "blocks": [{"h": "1. What PREP means", "bullets": ["Point: state your answer first.", "Reason: say why.", "Example: give a real case.", "Point: repeat your answer in a short closing line."]}, {"h": "2. Example", "text": "Question: Should students learn online?", "bullets": ["Point: Yes, I think online learning is useful.", "Reason: It saves travel time and lets students study at their own pace.", "Example: Last year I finished a design course in the evenings after work.", "Point: So online learning is a flexible option for many people."]}, {"h": "3. Useful phrases", "bullets": ["In my opinion...", "The main reason is...", "For example...", "That is why..."]}, {"h": "Practice", "text": "Answer this question aloud in 45 seconds using PREP: What skill would you like to learn, and why? Record yourself and listen once."}]}, "quiz": [{"q": "What does PREP stand for?", "o": ["Point, Reason, Example, Point", "Plan, Read, Edit, Publish", "Problem, Reply, End, Pause"], "a": 0, "why": "It gives your answer a clear shape."}, {"q": "What comes first in PREP?", "o": ["Your point", "Your example", "Your thanks"], "a": 0, "why": "State your answer first."}, {"q": "Which sentence is a good Example?", "o": ["Last year I finished a design course in the evenings.", "I think so.", "Because it is good."], "a": 0, "why": "An example is a real, specific case."}, {"q": "Which phrase introduces a reason?", "o": ["The main reason is...", "By the way...", "Anyway..."], "a": 0, "why": "It tells the listener a reason is coming."}, {"q": "Why state your point first?", "o": ["Listeners understand you faster", "It makes you sound slower", "It avoids examples"], "a": 0, "why": "A clear start helps the listener follow."}], "cheat": ["PREP: Point, Reason, Example, Point", "Start with your answer, then explain", "Active listening: face the speaker, do not interrupt, repeat key points", "Short emails: clear subject, one request, polite closing", "Use 'I' statements: I feel concerned about..., not You always...", "Disagree politely: I see your point, however...", "Slow down and pause when presenting", "Ask questions to check understanding"]}, {"id": "economics", "tag": "Economics", "title": "Economics Essentials", "level": "Beginner", "lessons": ["What economics is about: scarcity and choice", "Supply and demand", "Inflation and interest rates", "GDP and economic growth", "Trade and comparative advantage", "Reading economic news"], "sample": {"title": "Supply and demand", "intro": "Supply and demand explain how prices are set in most markets. Once you see the pattern, news about prices makes much more sense.", "blocks": [{"h": "1. Demand", "text": "Demand is how much people want to buy at each price. When the price goes up, people usually buy less. This is the law of demand."}, {"h": "2. Supply", "text": "Supply is how much sellers want to sell at each price. When the price goes up, sellers usually offer more."}, {"h": "3. Equilibrium", "text": "The equilibrium price is where the quantity buyers want equals the quantity sellers offer. There is no shortage and no surplus."}, {"h": "4. What moves the curves", "bullets": ["Demand rises: higher incomes, a trend, a lower price of a substitute.", "Supply falls: higher production costs, a bad harvest, new regulation.", "Example: a poor coffee harvest reduces supply, so the equilibrium price of coffee rises."]}, {"h": "Practice", "text": "Choose a product you buy often. Write one event that would increase demand and one that would reduce supply. What happens to the price each time?"}]}, "quiz": [{"q": "When the price rises, demand usually...", "o": ["falls", "rises", "stays exactly the same"], "a": 0, "why": "This is the law of demand."}, {"q": "The equilibrium price is where...", "o": ["quantity demanded equals quantity supplied", "the price is lowest", "sellers stop selling"], "a": 0, "why": "At equilibrium there is no shortage and no surplus."}, {"q": "A poor coffee harvest will most likely...", "o": ["raise the price of coffee", "lower the price of coffee", "have no effect"], "a": 0, "why": "Supply falls, so the equilibrium price rises."}, {"q": "Higher incomes usually make demand for most goods...", "o": ["rise", "fall to zero", "disappear"], "a": 0, "why": "People can afford to buy more."}, {"q": "When the price rises, sellers usually...", "o": ["offer more", "offer less", "stop all sales"], "a": 0, "why": "This is the law of supply."}], "cheat": ["Scarcity forces choice, and every choice has an opportunity cost", "Law of demand: higher price, lower quantity demanded", "Law of supply: higher price, more quantity supplied", "Equilibrium: quantity demanded equals quantity supplied", "Inflation: a general rise in prices. GDP: value of goods and services produced", "Comparative advantage: specialise in what you produce at the lower opportunity cost", "Subsidy = government support. Tariff = tax on imports", "Reading news: ask whether demand or supply changed"]}, {"id": "ir", "tag": "International Relations", "title": "International Relations: Big Ideas", "level": "Beginner to intermediate", "lessons": ["What is international relations?", "Realism, liberalism, constructivism", "States, power and sovereignty", "International organizations", "War, peace and security", "Writing about IR in English"], "sample": {"title": "Three theories: realism, liberalism, constructivism", "intro": "Theories are lenses. They help you explain why countries cooperate, compete or go to war. No single lens explains everything.", "blocks": [{"h": "1. Realism", "text": "Realists see the world as anarchic: there is no authority above states. States look after their own security and power.", "bullets": ["Key idea: power and national interest.", "Example: military alliances and the balance of power."]}, {"h": "2. Liberalism", "text": "Liberals believe cooperation is possible through trade, institutions and shared rules.", "bullets": ["Key idea: cooperation and interdependence.", "Example: the World Trade Organization and the European Union."]}, {"h": "3. Constructivism", "text": "Constructivists argue that ideas, identities and norms shape what states want and do.", "bullets": ["Key idea: shared beliefs create international reality.", "Example: the growing norm against nuclear weapons use."]}, {"h": "4. Which lens fits?", "text": "Ask what each theory would highlight about the same event, such as a trade agreement. Realism looks at who gains power, liberalism at the rules and benefits, constructivism at the identities and norms involved."}, {"h": "Practice", "text": "Take a recent international news story. Write two sentences explaining it from one theory and two from another."}]}, "quiz": [{"q": "Realism focuses on...", "o": ["power and national interest", "cooperation only", "music and art"], "a": 0, "why": "Realists see states competing for security and power."}, {"q": "Liberalism believes cooperation is possible through...", "o": ["trade and institutions", "secret wars", "isolation"], "a": 0, "why": "Shared rules and trade can reduce conflict."}, {"q": "Constructivism stresses...", "o": ["ideas, identities and norms", "only military force", "only trade numbers"], "a": 0, "why": "Shared beliefs shape what states want."}, {"q": "In IR, 'anarchy' means...", "o": ["no authority above states", "constant chaos", "no governments"], "a": 0, "why": "It describes the lack of a world government."}, {"q": "The WTO and the EU are examples often linked to...", "o": ["liberalism", "realism only", "none of the theories"], "a": 0, "why": "They show cooperation through institutions and rules."}], "cheat": ["Anarchy means no authority above states, not chaos", "Realism: power, security, national interest", "Liberalism: cooperation, trade, institutions", "Constructivism: ideas, identities, norms", "Sovereignty: a state's right to govern itself", "Key terms: balance of power, alliance, deterrence", "Theories are lenses. None explains everything", "Essay tip: compare two theories on the same event"]}, {"id": "affairs", "tag": "International Affairs", "title": "Global Affairs Explained", "level": "Beginner to intermediate", "lessons": ["How the United Nations works", "Global trade and supply chains", "Climate diplomacy", "Regional organizations", "Reading and discussing the news in English", "Vocabulary for global issues"], "sample": {"title": "How the UN Security Council works", "intro": "The Security Council is the part of the United Nations with the main responsibility for international peace and security.", "blocks": [{"h": "1. Members", "text": "There are 15 members. Five are permanent: China, France, Russia, the United Kingdom and the United States. Ten are elected for two-year terms."}, {"h": "2. The veto", "text": "Each permanent member can veto a substantive resolution. One veto is enough to block it, even when all other members vote yes."}, {"h": "3. What it can do", "bullets": ["Call for ceasefires and send peacekeepers.", "Impose sanctions.", "Authorize the use of force (rare)."]}, {"h": "4. The debate", "text": "Supporters say the veto keeps major powers inside the system. Critics say it blocks action on serious crises. Both views are common in discussion and in IELTS essays."}, {"h": "Useful vocabulary", "bullets": ["resolution: a formal decision", "sanctions: penalties on a country", "peacekeeping: international forces that help keep peace", "veto: the power to reject a decision"]}, {"h": "Practice", "text": "In three sentences, explain whether the veto power should be reformed. Use 'On the one hand' and 'On the other hand'."}]}, "quiz": [{"q": "How many members does the UN Security Council have?", "o": ["10", "15", "20"], "a": 1, "why": "There are 15 members."}, {"q": "How many are permanent members?", "o": ["Three", "Five", "Ten"], "a": 1, "why": "China, France, Russia, the UK and the US."}, {"q": "What does one veto from a permanent member do?", "o": ["Blocks a substantive resolution", "Starts a vote again", "Removes a member"], "a": 0, "why": "One veto is enough to block it."}, {"q": "How long is an elected member's term?", "o": ["One year", "Two years", "Five years"], "a": 1, "why": "Ten members are elected for two-year terms."}, {"q": "What are sanctions?", "o": ["Penalties on a country", "Peace treaties", "Trade festivals"], "a": 0, "why": "They are used to pressure a government."}], "cheat": ["UN Security Council: 15 members, 5 permanent (China, France, Russia, UK, US)", "One permanent member's veto blocks a substantive resolution", "Ten elected members serve two-year terms", "Sanctions are penalties on a country", "Peacekeeping: international forces that help keep the peace", "Trade depends on supply chains", "Climate diplomacy: countries negotiate shared targets", "Reading news in English: headline, who, what, why it matters"]}];
+const VOCAB=[{"w": "inflation", "t": "noun", "d": "A general rise in prices over time.", "e": "Inflation made food more expensive this year.", "tr": {"ru": "инфляция", "es": "inflación", "uz": "inflyatsiya"}}, {"w": "supply chain", "t": "noun", "d": "The steps that move a product from maker to buyer.", "e": "A port strike disrupted the supply chain.", "tr": {"ru": "цепочка поставок", "es": "cadena de suministro", "uz": "ta'minot zanjiri"}}, {"w": "sovereignty", "t": "noun", "d": "A country's right to govern itself.", "e": "Many countries protect their sovereignty carefully.", "tr": {"ru": "суверенитет", "es": "soberanía", "uz": "suverenitet"}}, {"w": "diplomacy", "t": "noun", "d": "Managing relations between countries by talking.", "e": "Diplomacy helped both sides avoid conflict.", "tr": {"ru": "дипломатия", "es": "diplomacia", "uz": "diplomatiya"}}, {"w": "sanctions", "t": "noun", "d": "Penalties placed on a country to change its actions.", "e": "The council imposed sanctions on the regime.", "tr": {"ru": "санкции", "es": "sanciones", "uz": "sanksiyalar"}}, {"w": "ceasefire", "t": "noun", "d": "An agreement to stop fighting.", "e": "A ceasefire began at midnight.", "tr": {"ru": "прекращение огня", "es": "alto el fuego", "uz": "o'qni to'xtatish"}}, {"w": "tariff", "t": "noun", "d": "A tax on imported goods.", "e": "The government raised the tariff on steel.", "tr": {"ru": "таможенная пошлина", "es": "arancel", "uz": "bojxona bojlari"}}, {"w": "scarcity", "t": "noun", "d": "Not having enough of something that people want.", "e": "Scarcity forces people to make choices.", "tr": {"ru": "ограниченность ресурсов", "es": "escasez", "uz": "tanqislik"}}, {"w": "negotiate", "t": "verb", "d": "To discuss in order to reach an agreement.", "e": "They negotiated a new trade deal.", "tr": {"ru": "вести переговоры", "es": "negociar", "uz": "muzokara olib borish"}}, {"w": "coherent", "t": "adjective", "d": "Clear, logical and easy to follow.", "e": "Her essay was coherent from start to finish.", "tr": {"ru": "связный, логичный", "es": "coherente", "uz": "izchil"}}, {"w": "mitigate", "t": "verb", "d": "To make something less serious.", "e": "Trees can mitigate the effects of heat in cities.", "tr": {"ru": "смягчать", "es": "mitigar", "uz": "yumshatish"}}, {"w": "ambiguous", "t": "adjective", "d": "Having more than one possible meaning.", "e": "The question was ambiguous, so I asked for details.", "tr": {"ru": "неоднозначный", "es": "ambiguo", "uz": "noaniq"}}, {"w": "substantial", "t": "adjective", "d": "Large in size, amount or importance.", "e": "There has been a substantial increase in prices.", "tr": {"ru": "значительный", "es": "considerable", "uz": "sezilarli"}}, {"w": "advocate", "t": "verb", "d": "To publicly support an idea or plan.", "e": "She advocates free education for all.", "tr": {"ru": "выступать за", "es": "abogar por", "uz": "yoqlab chiqish"}}, {"w": "emerging economy", "t": "noun", "d": "A country whose economy is growing and developing fast.", "e": "Many emerging economies attract foreign investment.", "tr": {"ru": "развивающаяся экономика", "es": "economía emergente", "uz": "rivojlanayotgan iqtisodiyot"}}, {"w": "summit", "t": "noun", "d": "An important meeting between leaders.", "e": "Leaders met at a summit on climate change.", "tr": {"ru": "саммит", "es": "cumbre", "uz": "sammit"}}, {"w": "treaty", "t": "noun", "d": "A formal written agreement between countries.", "e": "The two nations signed a peace treaty.", "tr": {"ru": "договор", "es": "tratado", "uz": "shartnoma"}}, {"w": "multilateral", "t": "adjective", "d": "Involving three or more countries.", "e": "They prefer multilateral talks to one-to-one deals.", "tr": {"ru": "многосторонний", "es": "multilateral", "uz": "ko'p tomonlama"}}, {"w": "fluent", "t": "adjective", "d": "Able to speak smoothly and easily.", "e": "After two years she was fluent in English.", "tr": {"ru": "беглый, свободный", "es": "fluido", "uz": "ravon"}}, {"w": "paraphrase", "t": "verb", "d": "To say something again using different words.", "e": "Paraphrase the question in your introduction.", "tr": {"ru": "перефразировать", "es": "parafrasear", "uz": "boshqacha ifodalash"}}, {"w": "consensus", "t": "noun", "d": "General agreement among a group.", "e": "The committee reached a consensus.", "tr": {"ru": "консенсус", "es": "consenso", "uz": "kelishuv"}}, {"w": "subsidy", "t": "noun", "d": "Money given by a government to support an industry.", "e": "Farmers receive a subsidy for fuel.", "tr": {"ru": "субсидия", "es": "subsidio", "uz": "subsidiya"}}, {"w": "GDP", "t": "noun", "d": "The total value of goods and services a country produces in a year.", "e": "GDP grew by two percent last year.", "tr": {"ru": "ВВП", "es": "PIB", "uz": "YaIM"}}, {"w": "humanitarian", "t": "adjective", "d": "Aimed at helping people who are suffering.", "e": "Humanitarian aid reached the region by road.", "tr": {"ru": "гуманитарный", "es": "humanitario", "uz": "gumanitar"}}];
+const LEVEL=[{"q": "My brother ___ in a bank.", "o": ["works", "work", "working"], "a": 0}, {"q": "I ___ to the cinema yesterday.", "o": ["go", "went", "have gone"], "a": 1}, {"q": "If it rains tomorrow, we ___ at home.", "o": ["stay", "will stay", "stayed"], "a": 1}, {"q": "She has lived here ___ 2015.", "o": ["for", "since", "from"], "a": 1}, {"q": "I'm not used ___ early.", "o": ["to get up", "to getting up", "getting up"], "a": 1}, {"q": "By next year, I ___ my degree.", "o": ["will finish", "will have finished", "finish"], "a": 1}, {"q": "Despite ___ hard, he failed the exam.", "o": ["studying", "to study", "study"], "a": 0}, {"q": "Had I known, I ___ you.", "o": ["would have told", "would tell", "told"], "a": 0}, {"q": "Not only ___ late, but he also forgot the documents.", "o": ["he arrived", "did he arrive", "he did arrive"], "a": 1}, {"q": "Which word is closest in meaning to 'substantial'?", "o": ["small", "large", "uncertain"], "a": 1}];
+const $=s=>document.querySelector(s);
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove("on"),3800)}
+function buy(id){
+  const u=BUY_LINKS[id];
+  if(u){window.open(u,"_blank","noopener")||(location.href=u);return}
+  toast("Checkout is not connected yet. Please check back soon or email us.");
+}
+const ICON={
+speaking:'<rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/>',
+english:'<path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1.1-4.2A8 8 0 1 1 21 12z"/><path d="M8.5 11h7M8.5 14h4"/>',
+ielts:'<circle cx="12" cy="9" r="6"/><path d="M8.5 14.5 7 22l5-3 5 3-1.5-7.5"/>',
+communication:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.5 0 4.5 2 4.5 4.5"/>',
+economics:'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',
+ir:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',
+affairs:'<path d="M3 9l9-5 9 5M5 9v9M9.5 9v9M14.5 9v9M19 9v9M3 20h18"/>'};
+const OUT={
+english:["Use present, past and future tenses correctly","Hold everyday conversations and small talk","Use common phrasal verbs","Improve pronunciation and word stress"],
+ielts:["Know the format and scoring of all four tests","Plan and write Task 1 and Task 2 answers","Answer Speaking Parts 1, 2 and 3","Avoid common Reading and Listening traps"],
+communication:["Structure answers with the PREP method","Listen actively and respond well","Write short, polite emails","Present ideas and handle disagreement"],
+economics:["Explain scarcity, choice and opportunity cost","Read supply and demand","Understand inflation, interest rates and GDP","Follow economic news with confidence"],
+ir:["Compare realism, liberalism and constructivism","Explain power, states and sovereignty","Understand international organizations","Write about international relations in English"],
+affairs:["Explain how the United Nations works","Understand trade and climate diplomacy","Discuss the news in English","Use vocabulary for global issues"]};
+OUT.speaking=["Stress the right words and sound natural","Link words and understand fast speech","Speak more fluently without translating","Tell stories and describe experiences"];
+const COLOR={speaking:"#B8337A",english:"#2F6FD6",ielts:"#C77A0B",communication:"#12806C",economics:"#6D4CE0",ir:"#C23A52",affairs:"#237FA3"};
+$("#grid").innerHTML=COURSES.map(c=>`<div class="card" style="--c:${COLOR[c.id]}">
+  <div class="vis"><svg viewBox="0 0 24 24" aria-hidden="true">${ICON[c.id]}</svg></div>
+  <span class="tag">${esc(c.tag)}</span><h3>${esc(c.title)}</h3>
+  <div class="meta">${c.lessons.length} lessons · PDF for each · Level ${esc(c.level)}</div>
+  <div><div class="bar"><i data-bar="${c.id}"></i></div><span class="meta" data-ptxt="${c.id}"></span></div>
+  <details class="lessons"><summary>Lessons and what you will learn</summary><h5>Lessons</h5><ol class="tl">${c.lessons.map((l,i)=>`<li><label><input type="checkbox" data-tick="${c.id}:${i}"> ${esc(l)}</label></li>`).join("")}</ol><h5>You will learn to</h5><ul>${OUT[c.id].map(l=>`<li>${esc(l)}</li>`).join("")}</ul></details>
+  <div class="buy"><div class="price">$3 <small>one time</small></div><button class="btn sm" data-buy="${c.id}">Buy course</button></div>
+  <button class="link" data-sample="${c.id}">Read free sample lesson</button><button class="link" data-cheat="${c.id}">Open cheat sheet</button></div>`).join("");
+const GOALS=[["I want to sound natural when I speak","speaking"],["I want a higher IELTS score","ielts"],["I want to speak English with confidence","english"],["I want to write and present clearly","communication"],["I want to understand money and markets","economics"],["I want to understand world politics","ir"],["I want to follow global news","affairs"]];
+$("#chips").innerHTML=GOALS.map(([g,id])=>`<button class="opt" aria-pressed="false" data-goal="${id}">${esc(g)}</button>`).join("");
+function pickGoal(id,btn){
+  document.querySelectorAll("[data-goal]").forEach(b=>b.setAttribute("aria-pressed",b===btn?"true":"false"));
+  const c=COURSES.find(x=>x.id===id);
+  $("#rec").innerHTML=`<span>Start with <b>${esc(c.title)}</b> · ${c.lessons.length} lessons · $3</span><button class="btn sm" data-sample="${id}">Try the free lesson</button>`;
+}
+$("#copymail").addEventListener("click",async()=>{
+  const m=$("#mailtxt").textContent;
+  try{await navigator.clipboard.writeText(m);toast("Email copied")}
+  catch(e){const r=document.createRange();r.selectNodeContents($("#mailtxt"));const s=getSelection();s.removeAllRanges();s.addRange(r);toast("Email selected. Copy it from here.")}
+});
+const canSay="speechSynthesis" in window;
+function say(txt){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang="en-US";u.rate=.9;speechSynthesis.speak(u)}catch(e){toast("Audio is not supported on this device")}}
+let PR=load("novax.prog",{done:[],ticks:{}});
+function updProg(){
+  let tot=0,tk=0;
+  COURSES.forEach(c=>{const n=(PR.ticks[c.id]||[]).length;tot+=c.lessons.length;tk+=n;
+    const bar=document.querySelector(`[data-bar="${c.id}"]`),tx=document.querySelector(`[data-ptxt="${c.id}"]`);
+    if(bar){bar.style.width=(100*n/c.lessons.length)+"%";tx.textContent=`${n} of ${c.lessons.length} lessons done`+(PR.done.includes(c.id)?" · sample completed":"")}});
+  $("#allbar").style.width=(100*tk/tot)+"%";
+  $("#alltxt").textContent=`Your progress: ${tk} of ${tot} lessons ticked · ${PR.done.length} of ${COURSES.length} free samples completed`;
+  document.querySelectorAll("[data-tick]").forEach(cb=>{const[id,i]=cb.dataset.tick.split(":");cb.checked=(PR.ticks[id]||[]).includes(+i)});
+}
+document.addEventListener("change",e=>{
+  const cb=e.target.closest("[data-tick]");if(!cb)return;
+  const[id,i]=cb.dataset.tick.split(":"),a=PR.ticks[id]||[],n=+i;
+  PR.ticks[id]=cb.checked?(a.includes(n)?a:a.concat(n)):a.filter(x=>x!==n);
+  save("novax.prog",PR);updProg();
+});
+function stepHTML(b){
+  const k=/mistake/i.test(b.h)?"mistake":/practice/i.test(b.h)?"practice":"rule";
+  const sp=[b.h,b.text||"",(b.bullets||[]).join(". ")].join(". ");
+  return `<div class="block ${k}"><h4>${esc(b.h)}</h4>${b.text?`<p>${esc(b.text)}</p>`:""}${b.bullets?`<ul>${b.bullets.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:""}${canSay?`<button class="link" data-say="${esc(sp)}">Listen</button>`:""}</div>`;
+}
+function goStep(n){
+  const r=$("#reader"),st=r.querySelectorAll(".step");n=Math.max(0,Math.min(st.length-1,n));
+  st.forEach((s,i)=>s.hidden=i!==n);r.dataset.step=n;
+  $("#stepcount").textContent=`Step ${n+1} of ${st.length}`;
+  $("#stepbar").style.width=(100*(n+1)/st.length)+"%";
+  $("#prev").disabled=n===0;$("#next").disabled=n===st.length-1;
+  r.scrollTop=0;
+}
+function openSample(id){
+  const c=COURSES.find(x=>x.id===id);if(!c)return;const s=c.sample,r=$("#reader");
+  const steps=[`<h3>${esc(s.title)}</h3><p class="intro">${esc(s.intro)}</p>${canSay?`<button class="link" data-say="${esc(s.title+". "+s.intro)}">Listen</button>`:""}`]
+   .concat(s.blocks.map(stepHTML)).concat([quizHTML(c)+`<div class="block"><button class="btn" data-buy="${c.id}">Get the full course for $3</button></div>`]);
+  r.innerHTML=`<div class="sheet"><div class="rd-top"><span class="tag">Free sample · ${esc(c.title)}</span><button class="btn sm" id="close">Close</button></div>
+   <div class="bar" style="margin-top:.8rem"><i id="stepbar"></i></div>
+   <div class="steps">${steps.map((h,i)=>`<div class="step" data-s="${i}">${h}</div>`).join("")}</div>
+   <div class="stepnav"><button class="btn sm ghost2" id="prev">Back</button><span class="meta" id="stepcount"></span><button class="btn sm" id="next">Next</button></div></div>`;
+  r.hidden=false;document.body.style.overflow="hidden";goStep(0);
+}
+function openCheat(id){
+  const c=COURSES.find(x=>x.id===id),r=$("#reader");
+  r.innerHTML=`<div class="sheet"><div class="rd-top"><span class="tag">Cheat sheet · ${esc(c.title)}</span><button class="btn sm" id="close">Close</button></div>
+   <h3 style="margin-top:1rem">${esc(c.title)}: key points</h3><div class="block rule"><ul>${c.cheat.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+   <div class="block"><button class="btn" data-sample="${c.id}">Read the free sample lesson</button></div></div>`;
+  r.hidden=false;r.scrollTop=0;document.body.style.overflow="hidden";
+}
+/* level test */
+let lvDone=0,lvScore=0;
+$("#lvq").innerHTML=LEVEL.map((q,i)=>`<div class="q" data-i="${i}"><p>${i+1}. ${esc(q.q)}</p>${q.o.map((o,k)=>`<button data-lo="${k}">${esc(o)}</button>`).join("")}</div>`).join("");
+function answerL(btn){
+  const box=btn.closest(".q");if(box.dataset.done)return;
+  const item=LEVEL[+box.dataset.i],o=+btn.dataset.lo;box.dataset.done="1";
+  box.querySelectorAll("button").forEach((b,k)=>{b.disabled=true;if(k===item.a)b.classList.add("right");else if(b===btn)b.classList.add("wrong")});
+  if(o===item.a)lvScore++;lvDone++;
+  if(lvDone===LEVEL.length){
+    const s=lvScore;let lv,id,extra="";
+    if(s<=3){lv="A2 (elementary)";id="english"}else if(s<=5){lv="B1 (intermediate)";id="speaking"}else if(s<=7){lv="B1 to B2 (upper intermediate)";id="communication"}else{lv="B2 to C1 (advanced)";id="ielts"}
+    const c=COURSES.find(x=>x.id===id);
+    $("#lvres").innerHTML=`<span>Score: <b>${s} out of 10</b>. Approximate level: <b>${lv}</b>. Start with <b>${esc(c.title)}</b>. This is an informal estimate, not an official result.</span><button class="btn sm" data-sample="${id}">Try the free lesson</button>`;
+  }
+}
+function closeSample(){$("#reader").hidden=true;document.body.style.overflow=""}
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#reader").hidden)closeSample()});
+document.addEventListener("click",e=>{
+  const lo=e.target.closest("[data-lo]");if(lo){answerL(lo);return}
+  const sy=e.target.closest("[data-say]");if(sy){say(sy.dataset.say);return}
+  const ch=e.target.closest("[data-cheat]");if(ch){openCheat(ch.dataset.cheat);return}
+  if(e.target.id==="next"){goStep(+$("#reader").dataset.step+1);return}
+  if(e.target.id==="prev"){goStep(+$("#reader").dataset.step-1);return}
+  const qo=e.target.closest("[data-qo]");if(qo){answerQ(qo);return}
+  const g=e.target.closest("[data-goal]"),b=e.target.closest("[data-buy]"),s=e.target.closest("[data-sample]");
+  if(g){pickGoal(g.dataset.goal,g);return}
+  if(b)buy(b.dataset.buy);
+  else if(s){e.preventDefault();openSample(s.dataset.sample)}
+  else if(e.target.id==="close")closeSample();
+});
+
+/* quiz in sample lessons */
+function quizHTML(c){
+  if(!c.quiz)return"";
+  return `<div class="quiz" data-c="${c.id}" data-score="0" data-done="0"><h4>Quick quiz: ${c.quiz.length} questions</h4>`+
+   c.quiz.map((q,i)=>`<div class="q" data-i="${i}"><p>${i+1}. ${esc(q.q)}</p>${q.o.map((o,k)=>`<button data-qo="${k}">${esc(o)}</button>`).join("")}<p class="why"></p></div>`).join("")+`<p class="score" id="qscore" aria-live="polite"></p></div>`;
+}
+function answerQ(btn){
+  const box=btn.closest(".q"),qz=btn.closest(".quiz");if(box.dataset.done)return;
+  const c=COURSES.find(x=>x.id===qz.dataset.c),item=c.quiz[+box.dataset.i],o=+btn.dataset.qo;
+  box.dataset.done="1";
+  box.querySelectorAll("button").forEach((b,k)=>{b.disabled=true;if(k===item.a)b.classList.add("right");else if(b===btn)b.classList.add("wrong")});
+  box.querySelector(".why").textContent=(o===item.a?"Correct. ":"Not quite. ")+item.why;
+  if(o===item.a)qz.dataset.score=+qz.dataset.score+1;
+  qz.dataset.done=+qz.dataset.done+1;
+  if(+qz.dataset.done===c.quiz.length){if(!PR.done.includes(c.id)){PR.done.push(c.id);save("novax.prog",PR);updProg()}}
+  if(+qz.dataset.done===c.quiz.length)qz.querySelector("#qscore").textContent=`Your score: ${qz.dataset.score} out of ${c.quiz.length}`;
+}
+/* storage helpers */
+function load(k,f){try{const v=localStorage.getItem(k);return v?JSON.parse(v):f}catch(e){return f}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+/* tabs */
+document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll("[data-tab]").forEach(x=>x.setAttribute("aria-selected",x===b?"true":"false"));
+  ["fc","es","pl"].forEach(k=>$("#p-"+k).hidden=k!==b.dataset.tab);
+}));
+/* flashcards */
+const today=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+let LANG=load("novax.lang","");
+let prog=load("novax.fc",{known:[],streak:0,last:""}),cur=0,shown=false;
+const wi=Math.floor(Date.now()/86400000)%VOCAB.length,W=VOCAB[wi];
+function drawWod(){$("#wod").innerHTML=`<b>${esc(W.w)}</b> <span class="meta">(${esc(W.t)})</span>${LANG&&W.tr?` · <b style="color:var(--accent)">${esc(W.tr[LANG])}</b>`:""}<br>${esc(W.d)}<br><i style="color:var(--muted)">${esc(W.e)}</i>`}
+drawWod();
+function nextCard(){
+  for(let k=0;k<VOCAB.length;k++){const i=(cur+k)%VOCAB.length;if(!prog.known.includes(VOCAB[i].w)){cur=i;return true}}
+  return false;
+}
+function drawCard(){
+  const has=nextCard(),el=$("#fcard");
+  if(!has){el.innerHTML='<div class="w">All done!</div><div class="d">You have learned every word. Come back tomorrow for a new Word of the day.</div>';}
+  else{const v=VOCAB[cur];el.innerHTML=`<div class="t">${esc(v.t)}</div><div class="w">${esc(v.w)}</div>`+(shown?`${LANG&&v.tr?`<div class="d" style="color:var(--accent);font-weight:600">${esc(v.tr[LANG])}</div>`:""}<div class="d">${esc(v.d)}</div><div class="e">${esc(v.e)}</div>`:"");}
+  $("#fcFlip").textContent=shown?"Hide meaning":"Show meaning";
+  $("#fcStat").textContent=`${prog.known.length} of ${VOCAB.length} words learned · Study streak: ${prog.streak} day${prog.streak===1?"":"s"}`;
+}
+$("#fcFlip").addEventListener("click",()=>{shown=!shown;drawCard()});
+$("#fcAgain").addEventListener("click",()=>{shown=false;cur=(cur+1)%VOCAB.length;drawCard()});
+$("#fcKnow").addEventListener("click",()=>{
+  const v=VOCAB[cur];if(!v||prog.known.includes(v.w))return;
+  prog.known.push(v.w);
+  const t=today(),y=new Date(Date.now()-864e5),ys=y.getFullYear()+"-"+String(y.getMonth()+1).padStart(2,"0")+"-"+String(y.getDate()).padStart(2,"0");
+  if(prog.last!==t){prog.streak=prog.last===ys?prog.streak+1:1;prog.last=t}
+  save("novax.fc",prog);shown=false;cur=(cur+1)%VOCAB.length;drawCard();
+});
+drawCard();
+$("#fcLang").value=LANG;
+$("#fcLang").addEventListener("change",e=>{LANG=e.target.value;save("novax.lang",LANG);drawWod();drawCard()});
+$("#fcSay").addEventListener("click",()=>{const v=VOCAB[cur];if(v)say(v.w+". "+v.e)});
+if(!canSay)document.querySelectorAll("[data-hide-nospeech]").forEach(b=>b.hidden=true);
+updProg();
+/* essay checker */
+$("#essayGo").addEventListener("click",()=>{
+  const text=$("#essay").value,low=text.toLowerCase();
+  const words=text.trim()?text.trim().split(/\s+/).length:0;
+  const paras=text.split(/\n\s*\n/).filter(p=>p.trim()).length;
+  const sents=text.split(/[.!?]+/).filter(s=>s.trim()).length;
+  const avg=sents?Math.round(words/sents):0;
+  const L=["however","moreover","furthermore","in addition","on the other hand","as a result","therefore","although","whereas","while","for example","for instance","such as"];
+  const used=L.filter(l=>low.includes(l)).length;
+  const items=[
+   [words>=250,`Length: ${words} words`,words>=250?"Good. Task 2 needs at least 250 words.":"Task 2 needs at least 250 words. Add a developed example."],
+   [paras>=4,`Paragraphs: ${paras}`,paras>=4?"Good. Four or more paragraphs is a clear structure.":"Aim for four: introduction, two body paragraphs, conclusion. Leave a blank line between them."],
+   [/in my opinion|i believe|i think|i agree|i disagree|in my view|i would argue|this essay/.test(low),"Clear position","Make your opinion clear in the introduction, for example: In my opinion..."],
+   [/for example|for instance|such as/.test(low),"Examples","Support each main idea with an example. Try: For example, ..."],
+   [/in conclusion|to conclude|to sum up|overall/.test(low),"Conclusion signal","Start your last paragraph with In conclusion, or Overall."],
+   [used>=3,`Linking words used: ${used}`,used>=3?"Good variety of linking words.":"Use more linking words such as however, moreover, therefore."],
+   [avg>=12&&avg<=28,`Average sentence length: ${avg} words`,avg>=12&&avg<=28?"A healthy mix of sentence length.":"Mix short and longer sentences. Very short or very long sentences can hide your ideas."]
+  ];
+  $("#essayOut").innerHTML=words<20?'<li class="no"><b>!</b><div>Please write or paste an essay first.</div></li>':
+   items.map(([ok,t,tip])=>`<li class="${ok?"ok":"no"}"><b>${ok?"✓":"!"}</b><div>${esc(t)}<small>${esc(tip)}</small></div></li>`).join("")+
+   '<li class="ok" style="background:none;border:0;padding:0"><div><small>This checks length and structure only. It does not score grammar, vocabulary or ideas.</small></div></li>';
+});
+/* study plan */
+$("#plGoal").innerHTML=COURSES.map(c=>`<option value="${c.id}">${esc(c.title)}</option>`).join("");
+$("#plGo").addEventListener("click",()=>{
+  const c=COURSES.find(x=>x.id===$("#plGoal").value),m=+$("#plMin").value;
+  const per=Math.max(2,Math.min(6,Math.floor(5*m/20))),n=c.lessons.length,weeks=Math.ceil(n/per);let h="";
+  for(let w=0;w<weeks;w++){const ls=c.lessons.slice(w*per,(w+1)*per);h+=`<li><b>Week ${w+1}</b><br>${ls.map(esc).join("<br>")}</li>`}
+  h+=`<li><b>Week ${weeks+1}</b><br>Review every lesson, redo the quizzes and repeat the practice tasks.</li>`;
+  $("#plOut").innerHTML=`<li style="background:none;border:0;padding:0;color:var(--muted)">${n} lessons at about ${per} per week, studying 5 days a week for ${m} minutes. Finish each practice task before the next lesson.</li>`+h;
+});
+/* globe */
+(function(){
+  const cv=$("#globe"),ctx=cv.getContext("2d");let W,H,dpr;
+  const pts=[];const N=520;
+  for(let i=0;i<N;i++){const y=1-2*(i+.5)/N,r=Math.sqrt(1-y*y),a=i*2.399963;pts.push([Math.cos(a)*r,y,Math.sin(a)*r])}
+  const hubs=[[.2,.4],[-.6,.1],[.7,-.3],[-.2,-.6],[.1,.8]].map(([x,y])=>{const z=Math.sqrt(Math.max(0,1-x*x-y*y));return[x,y,z]});
+  function size(){dpr=devicePixelRatio||1;W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
+  const rot=(p,a,t)=>{const c=Math.cos(a),s=Math.sin(a);let[x,y,z]=p;[x,z]=[x*c+z*s,-x*s+z*c];const ct=Math.cos(t),st=Math.sin(t);[y,z]=[y*ct-z*st,y*st+z*ct];return[x,y,z]};
+  function draw(a){
+    ctx.clearRect(0,0,W,H);const R=W*.42,cx=W/2,cy=H/2;
+    ctx.beginPath();ctx.arc(cx,cy,R*1.04,0,7);ctx.strokeStyle="rgba(232,149,28,.35)";ctx.lineWidth=1.5;ctx.stroke();
+    for(const p of pts){const[x,y,z]=rot(p,a,.35);const k=(z+1)/2;
+      ctx.fillStyle=`rgba(234,240,250,${.12+k*.7})`;ctx.fillRect(cx+x*R,cy-y*R,1.2+k*1.4,1.2+k*1.4)}
+    const h=hubs.map(p=>rot(p,a,.35));
+    ctx.strokeStyle="rgba(242,169,59,.55)";ctx.lineWidth=1.2;
+    for(let i=0;i<h.length;i++){const A=h[i],B=h[(i+1)%h.length];if(A[2]<-.1||B[2]<-.1)continue;
+      const mx=(A[0]+B[0])/2*1.25,my=(A[1]+B[1])/2*1.25;ctx.beginPath();ctx.moveTo(cx+A[0]*R,cy-A[1]*R);ctx.quadraticCurveTo(cx+mx*R,cy-my*R,cx+B[0]*R,cy-B[1]*R);ctx.stroke()}
+    for(const p of h){if(p[2]<0)continue;ctx.beginPath();ctx.arc(cx+p[0]*R,cy-p[1]*R,4+Math.sin(a*6)*1,0,7);ctx.fillStyle="#F2A93B";ctx.fill()}
+  }
+  size();addEventListener("resize",size);
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches){draw(.6)}
+  else{let t0=performance.now();(function f(t){draw((t-t0)/6000);requestAnimationFrame(f)})(t0)}
+})();
+</script>
+
+</body></html>
